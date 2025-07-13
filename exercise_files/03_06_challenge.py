@@ -36,6 +36,7 @@ class TerminalScribe:
     def setDirection(self, degrees):
         self.degrees = degrees
         self.radians = (self.degrees/180) * math.pi
+        self.direction = [math.sin(self.radians), -math.cos(self.radians)]
 
     def up(self):
         pos = [self.pos[0], self.pos[1]-1]
@@ -58,9 +59,7 @@ class TerminalScribe:
             self.draw(pos)
 
     def forward(self):
-        add_x = math.sin(self.radians)
-        add_y = -math.cos(self.radians)
-        pos = [self.pos[0] + add_x, self.pos[1] + add_y]
+        pos = [self.pos[0] + self.direction[0], self.pos[1] + self.direction[1]]
         if not self.canvas.hitsWall(pos):
             self.draw(pos)
 
